@@ -55,7 +55,7 @@ BootstrapDialogTitle.propTypes = {
 
 
 
-export default function CustomizedDialogs({ question }) {
+export default function CustomizedDialogs({ question, setUpdate}) {
     const [open, setOpen] = React.useState(false);
 
     const [ques, setQues] = useState(question.ques);
@@ -74,8 +74,19 @@ export default function CustomizedDialogs({ question }) {
 
 
         // -------- YET TO IMPLEMENT --------
-    const handleSubmit = () => {
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        const obj = {
+            id:question.id,
+            ques:ques,
+            options: [optionA, optionB, optionC, optionD, optionE]
+        }
 
+        setUpdate(obj);
+        handleClose();
+
+
+        
     }
 
     return (
@@ -91,7 +102,7 @@ export default function CustomizedDialogs({ question }) {
                 <BootstrapDialogTitle id="customized-dialog-title" onClose={handleClose}>
                     Edit Question
                 </BootstrapDialogTitle>
-                <form onSubmit={handleSubmit(question, ques, optionA, optionB, optionC, optionD, optionE)}>
+                <form onSubmit={handleSubmit}>
                     <DialogContent dividers>
                         <TextField
                             fullWidth
